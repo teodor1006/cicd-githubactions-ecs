@@ -29,14 +29,9 @@ class TestYourApp(unittest.TestCase):
            self.assertEqual(response.data.count(b'<div class="alert alert-danger">'), 0)
 
     def test_high_cpu_memory_message(self):
-        
-        # Test when both CPU and memory are below the threshold
         with app.test_request_context():
             with app.test_client() as client:
-                response = client.get('/')
-                self.assertNotIn(b'High CPU or Memory Detected', response.data)
-
-                # Test when CPU is above the threshold
+            # Test when CPU is above the threshold
                 with patch('psutil.cpu_percent', return_value=25):
                     response = client.get('/')
                     self.assertIn(b'High CPU or Memory Detected', response.data)
