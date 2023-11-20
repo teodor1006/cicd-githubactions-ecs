@@ -3,10 +3,18 @@ name: CI/CD
 on:
   push:
     branches: 
-      - main 
+      - main
+
+env:
+  AWS_REGION: us-east-1
+  ECS_REPOSITORY: 
+  ECS_SERVICE:
+  ECS_CLUSTER:
+  ECS_TASK_DEFINITION:
+  CONTAINER_NAME:
 
 jobs:
-  build:
+  Testing:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +32,29 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
-        run: python -m unittest unittests.py          
+        run: python -m unittest unittests.py
+
+
+  BUILD_AND_PUBLISH:
+    needs: Testing
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build & Upload Image to ECR
+        uses: appleboy/docker-ecr-action@master
+        with: 
+          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ${{ secrets.REGISTRY }}
+          repo: monitoringapp
+          region: ${{ env.AWS_REGION }}
+          tags: latest,${{ github.run_number }}
+          daemon_off: false
+          dockerfile: ./Dockerfile
+          context: ./
+
+              
+
+                  
