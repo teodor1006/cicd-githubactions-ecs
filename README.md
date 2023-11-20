@@ -1,4 +1,4 @@
-# **CI/CD for Cloud Native Monitoring Pthon App with GitHub Actions**
+# **CI/CD for Cloud Native Monitoring Python App with GitHub Actions**
 
 ## Things you will Learn 🤯
 
