@@ -7,12 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECS_REPOSITORY: 
-  ECS_SERVICE:
-  ECS_CLUSTER:
-  ECS_TASK_DEFINITION:
-  CONTAINER_NAME:
-
+  
 jobs:
   Testing:
     runs-on: ubuntu-latest
