@@ -382,10 +382,6 @@ After that open your ECR -> Repositories -> Images. You should see your images (
 
 ![image-tag](images/image-tag.png)
 
-You can also check your Image URI from your ECS Cluster -> Tasks
-
-![image-uri](images/image-uri-task.png)
-
 
 ## **Part 5: Delete your AWS ECS Cluster**
 
